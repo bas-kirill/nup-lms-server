@@ -1,0 +1,31 @@
+version: "3.0"
+
+networks:
+  lms:
+    driver: bridge
+
+services:
+  postgres:
+    image: postgres:14.9
+    restart: always
+    container_name: postgres
+    environment:
+      POSTGRES_DB: lms
+      POSTGRES_USER: lms
+      POSTGRES_PASSWORD: lms
+    volumes:
+      - ./store/pg/data:/var/lib/postgresql/data
+    ports:
+      - ${POSTGRES_PORT}:5432
+    networks:
+      - lms
+
+  server:
+    image: nup/lms-backend:latest
+    container_name: server
+    ports:
+      - ${SERVER_PORT}:8080
+    depends_on:
+      - postgres
+    networks:
+      - lms
