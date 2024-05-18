@@ -1,6 +1,6 @@
 package cy.ac.nup.lms.rest;
 
-import java.security.Principal;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class AdminEndpoint {
 
     @GetMapping("/hello")
-    public String hello(Principal principal) {
-        return "Hello admin, `%s`!".formatted(principal.getName());
+    public String hello(Authentication authentication) {
+        return "Hello admin, `%s`!".formatted(authentication.getName());
     }
 }

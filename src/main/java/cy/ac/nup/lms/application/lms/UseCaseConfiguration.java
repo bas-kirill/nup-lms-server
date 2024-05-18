@@ -4,11 +4,13 @@ import cy.ac.nup.lms.usecase.JwtGenerator;
 import cy.ac.nup.lms.usecase.JwtUsernameExtractor;
 import cy.ac.nup.lms.usecase.JwtValidator;
 import cy.ac.nup.lms.usecase.Login;
+import cy.ac.nup.lms.usecase.MeExtractor;
 import cy.ac.nup.lms.usecase.access.UserExtractor;
 import cy.ac.nup.lms.usecase.scenario.JwtGeneratorUseCase;
 import cy.ac.nup.lms.usecase.scenario.JwtUsernameExtractorUseCase;
 import cy.ac.nup.lms.usecase.scenario.JwtValidatorUseCase;
 import cy.ac.nup.lms.usecase.scenario.LoginUseCase;
+import cy.ac.nup.lms.usecase.scenario.MeExtractorUseCase;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -40,5 +42,10 @@ public class UseCaseConfiguration {
     public Login login(UserExtractor userExtractor, AuthenticationManager authenticationManager,
             JwtGenerator jwtGenerator) {
         return new LoginUseCase(userExtractor, authenticationManager, jwtGenerator);
+    }
+
+    @Bean
+    public MeExtractor meExtractor(UserExtractor userExtractor) {
+        return new MeExtractorUseCase(userExtractor);
     }
 }
