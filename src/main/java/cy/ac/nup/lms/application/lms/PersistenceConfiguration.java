@@ -17,8 +17,8 @@ public class PersistenceConfiguration {
     public InMemoryUserRepository userRepository() {
         // https://stackoverflow.com/questions/56762121/configure-nooppasswordencoder-in-spring
         Set<User> users = Set.of(
-                new User(Username.from("admin"), "{noop}123", "ROLE_ADMIN"),
-                new User(Username.from("kiryuxa"), "{noop}321", "ROLE_STUDENT")
+                new User(Username.from("admin"), "{noop}123", "ROLE_ADMIN", "Admin Admin"),
+                new User(Username.from("kiryuxa"), "{noop}321", "ROLE_STUDENT", "Kiryuxa Bas")
         );
         Map<Username, User> storage = users.stream().collect(Collectors.toMap(User::username, Function.identity()));
         return new InMemoryUserRepository(storage);
