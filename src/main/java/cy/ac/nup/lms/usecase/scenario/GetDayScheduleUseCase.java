@@ -8,7 +8,6 @@ import cy.ac.nup.lms.usecase.access.UserExtractor;
 import io.vavr.control.Either;
 import java.time.LocalDate;
 import java.util.List;
-import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
@@ -17,7 +16,7 @@ public class GetDayScheduleUseCase implements GetDaySchedule {
     private final UserExtractor userExtractor;
 
     @Override
-    public Either<Error, cy.ac.nup.lms.domain.DaySchedule> execute(Username username, LocalDate day) {
+    public Either<Error, DaySchedule> execute(Username username, LocalDate day) {
         return userExtractor.findByUsername(username)
                 .map(user -> {
                     List<Course> dayCourses = user.courses().stream()

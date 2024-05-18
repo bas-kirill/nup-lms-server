@@ -6,6 +6,7 @@ import cy.ac.nup.lms.usecase.JwtUsernameExtractor;
 import cy.ac.nup.lms.usecase.JwtValidator;
 import cy.ac.nup.lms.usecase.Login;
 import cy.ac.nup.lms.usecase.MeExtractor;
+import cy.ac.nup.lms.usecase.ShowProfile;
 import cy.ac.nup.lms.usecase.access.UserExtractor;
 import cy.ac.nup.lms.usecase.scenario.GetDayScheduleUseCase;
 import cy.ac.nup.lms.usecase.scenario.JwtGeneratorUseCase;
@@ -13,6 +14,7 @@ import cy.ac.nup.lms.usecase.scenario.JwtUsernameExtractorUseCase;
 import cy.ac.nup.lms.usecase.scenario.JwtValidatorUseCase;
 import cy.ac.nup.lms.usecase.scenario.LoginUseCase;
 import cy.ac.nup.lms.usecase.scenario.MeExtractorUseCase;
+import cy.ac.nup.lms.usecase.scenario.ShowProfileUseCase;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -54,5 +56,10 @@ public class UseCaseConfiguration {
     @Bean
     public GetDaySchedule getDaySchedule(UserExtractor userExtractor) {
         return new GetDayScheduleUseCase(userExtractor);
+    }
+
+    @Bean
+    public ShowProfile showProfile(UserExtractor userExtractor) {
+        return new ShowProfileUseCase(userExtractor);
     }
 }
