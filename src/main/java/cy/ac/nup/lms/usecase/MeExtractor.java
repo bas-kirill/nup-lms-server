@@ -12,7 +12,7 @@ public interface MeExtractor {
     @RequiredArgsConstructor
     sealed class Error {
 
-        private final String message;
+        public final String message;
 
         public static final class NotFound extends Error {
 
