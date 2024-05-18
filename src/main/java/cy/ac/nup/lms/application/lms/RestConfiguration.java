@@ -5,10 +5,12 @@ import cy.ac.nup.lms.rest.AnnouncementsEndpoint;
 import cy.ac.nup.lms.rest.DayScheduleEndpoint;
 import cy.ac.nup.lms.rest.LoginEndpoint;
 import cy.ac.nup.lms.rest.MeEndpoint;
+import cy.ac.nup.lms.rest.ProfileEndpoint;
 import cy.ac.nup.lms.rest.StudentEndpoint;
 import cy.ac.nup.lms.usecase.GetDaySchedule;
 import cy.ac.nup.lms.usecase.Login;
 import cy.ac.nup.lms.usecase.MeExtractor;
+import cy.ac.nup.lms.usecase.ShowProfile;
 import cy.ac.nup.lms.usecase.access.AnnouncementExtractor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -44,5 +46,10 @@ public class RestConfiguration {
     @Bean
     public DayScheduleEndpoint dayScheduleEndpoint(GetDaySchedule getDaySchedule) {
         return new DayScheduleEndpoint(getDaySchedule);
+    }
+
+    @Bean
+    public ProfileEndpoint profileEndpoint(ShowProfile showProfile) {
+        return new ProfileEndpoint(showProfile);
     }
 }
