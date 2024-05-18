@@ -20,6 +20,7 @@ public class PersistenceConfiguration {
 
     @Bean
     public Set<User> users() { // @formatter:off
+        // https://stackoverflow.com/questions/56762121/configure-nooppasswordencoder-in-spring
         return Set.of(
                 new User(Username.from("admin"), "{noop}123", "ROLE_ADMIN", "Admin Admin", List.of()),
                 new User(Username.from("kiryuxa"), "{noop}321", "ROLE_STUDENT", "Kiryuxa Bas", List.of(
@@ -31,7 +32,6 @@ public class PersistenceConfiguration {
 
     @Bean
     public InMemoryUserRepository userRepository(Set<User> users) {
-        // https://stackoverflow.com/questions/56762121/configure-nooppasswordencoder-in-spring
         Map<Username, User> storage = users.stream().collect(Collectors.toMap(User::username, Function.identity()));
         return new InMemoryUserRepository(storage);
     }

@@ -1,5 +1,6 @@
 package cy.ac.nup.lms.application.lms;
 
+import cy.ac.nup.lms.rest.ActiveUsersEndpoint;
 import cy.ac.nup.lms.rest.AdminEndpoint;
 import cy.ac.nup.lms.rest.AnnouncementsEndpoint;
 import cy.ac.nup.lms.rest.DayScheduleEndpoint;
@@ -14,6 +15,7 @@ import cy.ac.nup.lms.usecase.ShowProfile;
 import cy.ac.nup.lms.usecase.access.AnnouncementExtractor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.core.session.SessionRegistry;
 
 @Configuration
 public class RestConfiguration {
@@ -51,5 +53,10 @@ public class RestConfiguration {
     @Bean
     public ProfileEndpoint profileEndpoint(ShowProfile showProfile) {
         return new ProfileEndpoint(showProfile);
+    }
+
+    @Bean
+    public ActiveUsersEndpoint activeUsersEndpoint(SessionRegistry sessionRegistry) {
+        return new ActiveUsersEndpoint(sessionRegistry);
     }
 }
