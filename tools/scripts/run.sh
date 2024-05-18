@@ -3,6 +3,7 @@ set -e
 currentDir=$(cd -P -- "$(dirname -- "$0")" && pwd -P)
 rootDir="$currentDir/../../"
 
+(cd "$rootDir" && exec ./tools/scripts/clean.sh)
 (cd "$rootDir" && exec ./tools/scripts/buildJar.sh)
 (cd "$rootDir" && exec ./tools/scripts/buildImage.sh)
 (cd "$rootDir" && exec docker compose \
@@ -12,5 +13,5 @@ rootDir="$currentDir/../../"
   up -d \
   --remove-orphans)
 
-printf 'List of available ports\n'
+printf 'List of available ports:\n'
 (cd "$rootDir" && exec cat ./tools/docker/env/local.env)
