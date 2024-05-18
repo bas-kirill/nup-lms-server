@@ -13,6 +13,8 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.session.SessionRegistry;
+import org.springframework.security.core.session.SessionRegistryImpl;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
@@ -39,12 +41,15 @@ public class SecurityConfiguration {
     }
 
     @Bean
-    public SecurityFilterChain securityFilter(HttpSecurity http, UserDetailsService userDetailsService, JwtTokenFilter jwtTokenFilter, CorsConfigurationSource corsConfigurationSource) throws Exception { // @formatter:off
+    public SecurityFilterChain securityFilter(HttpSecurity http, UserDetailsService userDetailsService, JwtTokenFilter jwtTokenFilter, CorsConfigurationSource corsConfigurationSource, SessionRegistry sessionRegistry) throws Exception { // @formatter:off
         http = http
                 .csrf(AbstractHttpConfigurer::disable)
                 .cors(cors -> cors.configurationSource(corsConfigurationSource));
 
-        http = http.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
+        http = http.sessionManagement(session -> session
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .maximumSessions(1)
+                .sessionRegistry(sessionRegistry));
 
         http = http.userDetailsService(userDetailsService);
 
@@ -79,4 +84,8 @@ public class SecurityConfiguration {
         return new JwtTokenFilter(jwtValidator, userDetailsService, jwtUsernameExtractor);
     }
 
+    @Bean
+    public SessionRegistry sessionRegistry() {
+        return new SessionRegistryImpl();
+    }
 }
