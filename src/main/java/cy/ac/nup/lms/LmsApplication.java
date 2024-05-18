@@ -1,13 +1,12 @@
 package cy.ac.nup.lms;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-@SpringBootApplication
+import cy.ac.nup.lms.application.ApplicationConfiguration;
+import org.springframework.boot.SpringApplication;
+
 public class LmsApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(LmsApplication.class, args);
+        SpringApplication.run(ApplicationConfiguration.class, args);
     }
-
 }
