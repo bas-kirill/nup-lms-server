@@ -1,8 +1,11 @@
 package cy.ac.nup.lms.application.lms;
 
+import cy.ac.nup.lms.domain.Announcement;
 import cy.ac.nup.lms.domain.User;
 import cy.ac.nup.lms.domain.Username;
+import cy.ac.nup.lms.persistence.InMemoryAnnouncementRepository;
 import cy.ac.nup.lms.persistence.InMemoryUserRepository;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.function.Function;
@@ -22,5 +25,13 @@ public class PersistenceConfiguration {
         );
         Map<Username, User> storage = users.stream().collect(Collectors.toMap(User::username, Function.identity()));
         return new InMemoryUserRepository(storage);
+    }
+
+    @Bean
+    public InMemoryAnnouncementRepository announcementRepository() {
+        List<Announcement> announcements = List.of(
+                Announcement.from("Congratulations for ACM ICPC semi-finalists!")
+        );
+        return new InMemoryAnnouncementRepository(announcements);
     }
 }
