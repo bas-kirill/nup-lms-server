@@ -2,7 +2,7 @@ package cy.ac.nup.lms.application.lms;
 
 import cy.ac.nup.lms.rest.AdminEndpoint;
 import cy.ac.nup.lms.rest.LoginEndpoint;
-import cy.ac.nup.lms.rest.UserEndpoint;
+import cy.ac.nup.lms.rest.StudentEndpoint;
 import cy.ac.nup.lms.usecase.Login;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -21,7 +21,7 @@ public class RestConfiguration {
     }
 
     @Bean
-    public UserEndpoint userEndpoint() {
-        return new UserEndpoint();
+    public StudentEndpoint userEndpoint() {
+        return new StudentEndpoint();
     }
 }

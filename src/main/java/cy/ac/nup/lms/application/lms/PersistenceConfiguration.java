@@ -1,6 +1,5 @@
 package cy.ac.nup.lms.application.lms;
 
-import cy.ac.nup.lms.domain.Role;
 import cy.ac.nup.lms.domain.User;
 import cy.ac.nup.lms.domain.Username;
 import cy.ac.nup.lms.persistence.InMemoryUserRepository;
@@ -19,7 +18,7 @@ public class PersistenceConfiguration {
         // https://stackoverflow.com/questions/56762121/configure-nooppasswordencoder-in-spring
         Set<User> users = Set.of(
                 new User(Username.from("admin"), "{noop}123", "ROLE_ADMIN"),
-                new User(Username.from("kiryuxa"), "{noop}321", "ROLE_USER")
+                new User(Username.from("kiryuxa"), "{noop}321", "ROLE_STUDENT")
         );
         Map<Username, User> storage = users.stream().collect(Collectors.toMap(User::username, Function.identity()));
         return new InMemoryUserRepository(storage);

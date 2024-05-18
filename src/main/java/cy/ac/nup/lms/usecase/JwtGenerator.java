@@ -1,8 +1,8 @@
 package cy.ac.nup.lms.usecase;
 
-import cy.ac.nup.lms.domain.Username;
+import cy.ac.nup.lms.domain.User;
 
 public interface JwtGenerator {
 
-    String execute(Username username);
+    String execute(User user);
 }
