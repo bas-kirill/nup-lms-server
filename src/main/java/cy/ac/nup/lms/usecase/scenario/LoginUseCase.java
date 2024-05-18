@@ -27,6 +27,6 @@ public class LoginUseCase implements Login {
         );
 
         User user = userRepository.findByUsername(username).orElseThrow();
-        return jwtGenerator.execute(Username.from(user.getUsername()));
+        return jwtGenerator.execute(user);
     }
 }
