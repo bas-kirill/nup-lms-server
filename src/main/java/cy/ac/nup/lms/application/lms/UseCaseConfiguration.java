@@ -8,9 +8,11 @@ import cy.ac.nup.lms.usecase.JwtUsernameExtractor;
 import cy.ac.nup.lms.usecase.JwtValidator;
 import cy.ac.nup.lms.usecase.Login;
 import cy.ac.nup.lms.usecase.MeExtractor;
+import cy.ac.nup.lms.usecase.RemoveStudentFromCourse;
 import cy.ac.nup.lms.usecase.ShowProfile;
 import cy.ac.nup.lms.usecase.access.CourseExtractor;
 import cy.ac.nup.lms.usecase.access.UserExtractor;
+import cy.ac.nup.lms.usecase.access.UserPersister;
 import cy.ac.nup.lms.usecase.scenario.GetCourseUseCase;
 import cy.ac.nup.lms.usecase.scenario.GetDayScheduleUseCase;
 import cy.ac.nup.lms.usecase.scenario.GetUserInfoUseCase;
@@ -19,6 +21,7 @@ import cy.ac.nup.lms.usecase.scenario.JwtUsernameExtractorUseCase;
 import cy.ac.nup.lms.usecase.scenario.JwtValidatorUseCase;
 import cy.ac.nup.lms.usecase.scenario.LoginUseCase;
 import cy.ac.nup.lms.usecase.scenario.MeExtractorUseCase;
+import cy.ac.nup.lms.usecase.scenario.RemoveStudentFromCourseUseCase;
 import cy.ac.nup.lms.usecase.scenario.ShowProfileUseCase;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -76,5 +79,13 @@ public class UseCaseConfiguration {
     @Bean
     public GetCourse getCourse(CourseExtractor courseExtractor) {
         return new GetCourseUseCase(courseExtractor);
+    }
+
+    @Bean
+    public RemoveStudentFromCourse removeStudentFromCourse(
+            CourseExtractor courseExtractor,
+            UserExtractor userExtractor,
+            UserPersister userPersister) {
+        return new RemoveStudentFromCourseUseCase(courseExtractor, userExtractor, userPersister);
     }
 }

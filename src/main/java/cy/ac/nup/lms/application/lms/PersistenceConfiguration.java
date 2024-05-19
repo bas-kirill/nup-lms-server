@@ -31,16 +31,18 @@ public class PersistenceConfiguration {
     @Bean
     public Set<User> users(Set<Course> courses) { // @formatter:off
         // https://stackoverflow.com/questions/56762121/configure-nooppasswordencoder-in-spring
-        return Set.of(
-                new User(Username.from("admin"), "{noop}123", "ROLE_ADMIN", "Admin Admin", Set.of()),
-                new User(Username.from("kiryuxa"), "{noop}321", "ROLE_STUDENT", "Kiryuxa Bas", courses),
-                new User(Username.from("compsci"), "{noop}123", "ROLE_FACULTY", "Computer Science Department", courses)
-        );
+        User admin = User.create(Username.from("admin"), "{noop}123", "ROLE_ADMIN", "Admin Admin");
+        User kiryuxa = User.create(Username.from("kiryuxa"), "{noop}321", "ROLE_STUDENT", "Kiryuxa Bas");
+        User compsci = User.create(Username.from("compsci"), "{noop}123", "ROLE_FACULTY", "Computer Science Department");
+        kiryuxa.addCourses(courses);
+        compsci.addCourses(courses);
+        return Set.of(admin, kiryuxa, compsci);
     } // @formatter:on
 
     @Bean
     public InMemoryUserRepository userRepository(Set<User> users) {
-        Map<Username, User> storage = users.stream().collect(Collectors.toMap(User::username, Function.identity()));
+        Map<Username, User> storage = users.stream()
+                .collect(Collectors.toMap(user -> user.username, Function.identity()));
         return new InMemoryUserRepository(storage);
     }
 
@@ -54,7 +56,8 @@ public class PersistenceConfiguration {
 
     @Bean
     public InMemoryCourseRepository courseRepository(Set<Course> courses) {
-        Map<CourseCode, Course> storage = courses.stream().collect(Collectors.toMap(Course::code, Function.identity()));
+        Map<CourseCode, Course> storage = courses.stream()
+                .collect(Collectors.toMap(course -> course.code, Function.identity()));
         return new InMemoryCourseRepository(storage);
     }
 }

@@ -19,7 +19,7 @@ public class MeEndpoint {
     public Object me(Principal principal) {
         Username username = Username.from(principal.getName());
         return meExtractor.execute(username)
-                .fold(error -> error.message, user -> new MeModel(user.fullName()));
+                .fold(error -> error.message, user -> new MeModel(user.fullName));
     }
 
     record MeModel(String fullName) {

@@ -16,8 +16,8 @@ public class JwtGeneratorUseCase implements JwtGenerator {
 
     @Override
     public String execute(User user) {
-        Claims claims = Jwts.claims().setSubject(user.username().value);
-        claims.put("role", user.authority());
+        Claims claims = Jwts.claims().setSubject(user.username.value);
+        claims.put("role", user.authority);
 
         return Jwts.builder()
                 .setClaims(claims)

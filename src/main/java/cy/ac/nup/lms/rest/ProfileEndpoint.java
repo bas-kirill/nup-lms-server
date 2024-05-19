@@ -30,7 +30,7 @@ public class ProfileEndpoint {
             return new ProfileModel(
                     details.fullName(),
                     details.role(),
-                    details.courses().stream().map(course -> new Course(course.code().value, course.name())).toList());
+                    details.courses().stream().map(course -> new Course(course.code.value, course.name)).toList());
         }
 
         record Course(String code, String name) {

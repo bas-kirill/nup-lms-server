@@ -19,8 +19,8 @@ public class GetDayScheduleUseCase implements GetDaySchedule {
     public Either<Error, DaySchedule> execute(Username username, LocalDate day) {
         return userExtractor.findByUsername(username)
                 .map(user -> {
-                    List<Course> dayCourses = user.courses().stream()
-                            .filter(course -> course.startDate().isBefore(day) && day.isBefore(course.endDate()))
+                    List<Course> dayCourses = user.courses().values().stream()
+                            .filter(course -> course.startDate.isBefore(day) && day.isBefore(course.endDate))
                             .toList();
                     return new cy.ac.nup.lms.domain.DaySchedule(dayCourses);
                 })
