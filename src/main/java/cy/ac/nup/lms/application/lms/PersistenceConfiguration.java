@@ -33,7 +33,8 @@ public class PersistenceConfiguration {
         // https://stackoverflow.com/questions/56762121/configure-nooppasswordencoder-in-spring
         return Set.of(
                 new User(Username.from("admin"), "{noop}123", "ROLE_ADMIN", "Admin Admin", Set.of()),
-                new User(Username.from("kiryuxa"), "{noop}321", "ROLE_STUDENT", "Kiryuxa Bas", courses)
+                new User(Username.from("kiryuxa"), "{noop}321", "ROLE_STUDENT", "Kiryuxa Bas", courses),
+                new User(Username.from("compsci"), "{noop}123", "ROLE_FACULTY", "Computer Science Department", courses)
         );
     } // @formatter:on
 

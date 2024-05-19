@@ -3,6 +3,7 @@ package cy.ac.nup.lms.application.lms;
 import cy.ac.nup.lms.rest.ActiveUsersEndpoint;
 import cy.ac.nup.lms.rest.AdminEndpoint;
 import cy.ac.nup.lms.rest.AnnouncementsEndpoint;
+import cy.ac.nup.lms.rest.CourseDetailsEndpoint;
 import cy.ac.nup.lms.rest.CourseStudentsEndpoint;
 import cy.ac.nup.lms.rest.CoursesEndpoint;
 import cy.ac.nup.lms.rest.DayScheduleEndpoint;
@@ -11,6 +12,7 @@ import cy.ac.nup.lms.rest.MeEndpoint;
 import cy.ac.nup.lms.rest.ProfileEndpoint;
 import cy.ac.nup.lms.rest.StudentEndpoint;
 import cy.ac.nup.lms.rest.UserInfoEndpoint;
+import cy.ac.nup.lms.usecase.GetCourse;
 import cy.ac.nup.lms.usecase.GetDaySchedule;
 import cy.ac.nup.lms.usecase.GetUserInfo;
 import cy.ac.nup.lms.usecase.Login;
@@ -79,5 +81,10 @@ public class RestConfiguration {
     @Bean
     public UserInfoEndpoint userInfoEndpoint(GetUserInfo getUserInfo) {
         return new UserInfoEndpoint(getUserInfo);
+    }
+
+    @Bean
+    public CourseDetailsEndpoint courseDetailsEndpoint(GetCourse getCourse) {
+        return new CourseDetailsEndpoint(getCourse);
     }
 }
