@@ -3,6 +3,7 @@ package cy.ac.nup.lms.application.lms;
 import cy.ac.nup.lms.domain.Announcement;
 import cy.ac.nup.lms.domain.Course;
 import cy.ac.nup.lms.domain.CourseCode;
+import cy.ac.nup.lms.domain.FacultyCode;
 import cy.ac.nup.lms.domain.User;
 import cy.ac.nup.lms.domain.Username;
 import cy.ac.nup.lms.persistence.InMemoryAnnouncementRepository;
@@ -31,9 +32,9 @@ public class PersistenceConfiguration {
     @Bean
     public Set<User> users(Set<Course> courses) { // @formatter:off
         // https://stackoverflow.com/questions/56762121/configure-nooppasswordencoder-in-spring
-        User admin = User.create(Username.from("admin"), "{noop}123", "ROLE_ADMIN", "Admin Admin");
-        User kiryuxa = User.create(Username.from("kiryuxa"), "{noop}321", "ROLE_STUDENT", "Kiryuxa Bas");
-        User compsci = User.create(Username.from("compsci"), "{noop}123", "ROLE_FACULTY", "Computer Science Department");
+        User admin = User.create(FacultyCode.from("ACS"), Username.from("admin"), "{noop}123", "ROLE_ADMIN", "Admin Admin");
+        User kiryuxa = User.create(FacultyCode.from("ACS"), Username.from("kiryuxa"), "{noop}321", "ROLE_STUDENT", "Kiryuxa Bas");
+        User compsci = User.create(FacultyCode.from("ACS"), Username.from("compsci"), "{noop}123", "ROLE_FACULTY", "Computer Science Department");
         kiryuxa.addCourses(courses);
         compsci.addCourses(courses);
         return Set.of(admin, kiryuxa, compsci);

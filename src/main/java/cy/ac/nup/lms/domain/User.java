@@ -12,14 +12,16 @@ import org.springframework.security.core.userdetails.UserDetails;
 @SuppressWarnings("java:S2055")
 public class User extends AggregateRoot<Username> implements UserDetails {
 
+    public final FacultyCode facultyCode;
     public final Username username;
     public final String password;
     public final String authority;
     public final String fullName;
     private final Map<CourseCode, Course> courses;
 
-    private User(Username username, String password, String authority, String fullName) {
+    private User(FacultyCode facultyCode, Username username, String password, String authority, String fullName) {
         super(username);
+        this.facultyCode = facultyCode;
         this.username = username;
         this.password = password;
         this.authority = authority;
@@ -27,8 +29,9 @@ public class User extends AggregateRoot<Username> implements UserDetails {
         this.courses = new HashMap<>();
     }
 
-    public static User create(Username username, String password, String authority, String fullName) {
-        return new User(username, password, authority, fullName);
+    public static User create(FacultyCode facultyCode, Username username, String password, String authority,
+            String fullName) {
+        return new User(facultyCode, username, password, authority, fullName);
     }
 
     public Map<CourseCode, Course> courses() {
