@@ -22,12 +22,11 @@ public class ActiveUsersEndpoint {
         return sessionRegistry.getAllPrincipals().stream()
                 .filter(u -> !sessionRegistry.getAllSessions(u, false).isEmpty())
                 .map(User.class::cast)
-                .map(User::fullName)
-                .map(UserModel::new)
+                .map(user -> new UserModel(user.fullName(), user.username().value))
                 .toList();
     }
 
-    record UserModel(String fullName) {
+    record UserModel(String fullName, String login) {
 
     }
 }
