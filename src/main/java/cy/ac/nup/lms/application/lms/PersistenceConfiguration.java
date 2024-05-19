@@ -2,6 +2,7 @@ package cy.ac.nup.lms.application.lms;
 
 import cy.ac.nup.lms.domain.Announcement;
 import cy.ac.nup.lms.domain.Course;
+import cy.ac.nup.lms.domain.CourseCode;
 import cy.ac.nup.lms.domain.User;
 import cy.ac.nup.lms.domain.Username;
 import cy.ac.nup.lms.persistence.InMemoryAnnouncementRepository;
@@ -22,8 +23,8 @@ public class PersistenceConfiguration {
     @Bean
     public Set<Course> courses() { // @formatter:off
         return Set.of(
-                new Course("CS100", "Programming Principles II", LocalDate.of(2024, 1, 1), LocalDate.of(2024, 6, 1)),
-                new Course("CS200", "Functional Programming", LocalDate.of(2024, 1, 1), LocalDate.of(2024, 11, 1))
+                new Course(CourseCode.from("CS100"), "Programming Principles II", LocalDate.of(2024, 1, 1), LocalDate.of(2024, 6, 1)),
+                new Course(CourseCode.from("CS200"), "Functional Programming", LocalDate.of(2024, 1, 1), LocalDate.of(2024, 11, 1))
         );
     } // @formatter:on
 
@@ -52,6 +53,7 @@ public class PersistenceConfiguration {
 
     @Bean
     public InMemoryCourseRepository courseRepository(Set<Course> courses) {
-        return new InMemoryCourseRepository(courses);
+        Map<CourseCode, Course> storage = courses.stream().collect(Collectors.toMap(Course::code, Function.identity()));
+        return new InMemoryCourseRepository(storage);
     }
 }
