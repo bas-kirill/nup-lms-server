@@ -2,11 +2,12 @@ package cy.ac.nup.lms.domain;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-public record User(Username username, String password, String authority, String fullName, List<Course> courses)
+public record User(Username username, String password, String authority, String fullName, Set<Course> courses)
         implements UserDetails {
 
     @Override

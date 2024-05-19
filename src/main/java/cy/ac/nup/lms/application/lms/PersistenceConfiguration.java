@@ -5,6 +5,7 @@ import cy.ac.nup.lms.domain.Course;
 import cy.ac.nup.lms.domain.User;
 import cy.ac.nup.lms.domain.Username;
 import cy.ac.nup.lms.persistence.InMemoryAnnouncementRepository;
+import cy.ac.nup.lms.persistence.InMemoryCourseRepository;
 import cy.ac.nup.lms.persistence.InMemoryUserRepository;
 import java.time.LocalDate;
 import java.util.List;
@@ -19,14 +20,19 @@ import org.springframework.context.annotation.Configuration;
 public class PersistenceConfiguration {
 
     @Bean
-    public Set<User> users() { // @formatter:off
+    public Set<Course> courses() { // @formatter:off
+        return Set.of(
+                new Course("CS100", "Programming Principles II", LocalDate.of(2024, 1, 1), LocalDate.of(2024, 6, 1)),
+                new Course("CS200", "Functional Programming", LocalDate.of(2024, 1, 1), LocalDate.of(2024, 11, 1))
+        );
+    } // @formatter:on
+
+    @Bean
+    public Set<User> users(Set<Course> courses) { // @formatter:off
         // https://stackoverflow.com/questions/56762121/configure-nooppasswordencoder-in-spring
         return Set.of(
-                new User(Username.from("admin"), "{noop}123", "ROLE_ADMIN", "Admin Admin", List.of()),
-                new User(Username.from("kiryuxa"), "{noop}321", "ROLE_STUDENT", "Kiryuxa Bas", List.of(
-                        new Course("CS100", "Programming Principles II", LocalDate.of(2024, 1, 1), LocalDate.of(2024, 6, 1)),
-                        new Course("CS200", "Functional Programming", LocalDate.of(2024, 1, 1), LocalDate.of(2024, 11, 1))
-                ))
+                new User(Username.from("admin"), "{noop}123", "ROLE_ADMIN", "Admin Admin", Set.of()),
+                new User(Username.from("kiryuxa"), "{noop}321", "ROLE_STUDENT", "Kiryuxa Bas", courses)
         );
     } // @formatter:on
 
@@ -42,5 +48,10 @@ public class PersistenceConfiguration {
                 Announcement.from("Congratulations for ACM ICPC semi-finalists!")
         );
         return new InMemoryAnnouncementRepository(announcements);
+    }
+
+    @Bean
+    public InMemoryCourseRepository courseRepository(Set<Course> courses) {
+        return new InMemoryCourseRepository(courses);
     }
 }
