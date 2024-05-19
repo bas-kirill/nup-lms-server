@@ -18,7 +18,7 @@ public class CoursesEndpoint {
     @RequestMapping("/courses")
     public List<CourseModel> getCourses() {
         return courseExtractor.findAll().stream()
-                .map(course -> new CourseModel(course.code(), course.name()))
+                .map(course -> new CourseModel(course.code().value, course.name()))
                 .toList();
     }
 

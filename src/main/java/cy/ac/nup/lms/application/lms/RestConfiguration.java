@@ -3,6 +3,7 @@ package cy.ac.nup.lms.application.lms;
 import cy.ac.nup.lms.rest.ActiveUsersEndpoint;
 import cy.ac.nup.lms.rest.AdminEndpoint;
 import cy.ac.nup.lms.rest.AnnouncementsEndpoint;
+import cy.ac.nup.lms.rest.CourseStudentsEndpoint;
 import cy.ac.nup.lms.rest.CoursesEndpoint;
 import cy.ac.nup.lms.rest.DayScheduleEndpoint;
 import cy.ac.nup.lms.rest.LoginEndpoint;
@@ -15,6 +16,7 @@ import cy.ac.nup.lms.usecase.MeExtractor;
 import cy.ac.nup.lms.usecase.ShowProfile;
 import cy.ac.nup.lms.usecase.access.AnnouncementExtractor;
 import cy.ac.nup.lms.usecase.access.CourseExtractor;
+import cy.ac.nup.lms.usecase.access.UserExtractor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.core.session.SessionRegistry;
@@ -65,5 +67,10 @@ public class RestConfiguration {
     @Bean
     public CoursesEndpoint coursesEndpoint(CourseExtractor courseExtractor) {
         return new CoursesEndpoint(courseExtractor);
+    }
+
+    @Bean
+    public CourseStudentsEndpoint courseStudentsEndpoint(UserExtractor userExtractor) {
+        return new CourseStudentsEndpoint(userExtractor);
     }
 }

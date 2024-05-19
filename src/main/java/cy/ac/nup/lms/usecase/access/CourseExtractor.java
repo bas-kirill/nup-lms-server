@@ -1,9 +1,9 @@
 package cy.ac.nup.lms.usecase.access;
 
 import cy.ac.nup.lms.domain.Course;
-import java.util.Set;
+import java.util.Collection;
 
 public interface CourseExtractor {
 
-    Set<Course> findAll();
+    Collection<Course> findAll();
 }
