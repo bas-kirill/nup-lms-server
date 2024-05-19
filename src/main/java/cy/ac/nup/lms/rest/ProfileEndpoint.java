@@ -24,12 +24,13 @@ public class ProfileEndpoint {
                 .fold(error -> error.message, ProfileModel::from);
     }
 
-    record ProfileModel(String fullName, String role, List<Course> courses) {
+    record ProfileModel(String fullName, String role, String faculty, List<Course> courses) {
 
         static ProfileModel from(ProfileDetails details) {
             return new ProfileModel(
                     details.fullName(),
                     details.role(),
+                    details.faculty(),
                     details.courses().stream().map(course -> new Course(course.code.value, course.name)).toList());
         }
 

@@ -16,7 +16,7 @@ public class ShowProfileUseCase implements ShowProfile {
     public Either<Error, ProfileDetails> execute(Username username) {
         return userExtractor.findByUsername(username)
                 .<Either<Error, ProfileDetails>>map(
-                        user -> Either.right(new ProfileDetails(user.fullName, user.authority, user.courses().values())))
+                        user -> Either.right(ProfileDetails.from(user)))
                 .orElse(Either.left(new Error.UserNotFound(username)));
     }
 }
