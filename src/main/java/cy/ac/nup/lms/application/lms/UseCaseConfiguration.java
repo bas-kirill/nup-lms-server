@@ -1,5 +1,6 @@
 package cy.ac.nup.lms.application.lms;
 
+import cy.ac.nup.lms.usecase.AddStudentToCourse;
 import cy.ac.nup.lms.usecase.GetCourse;
 import cy.ac.nup.lms.usecase.GetDaySchedule;
 import cy.ac.nup.lms.usecase.GetUserInfo;
@@ -13,6 +14,7 @@ import cy.ac.nup.lms.usecase.ShowProfile;
 import cy.ac.nup.lms.usecase.access.CourseExtractor;
 import cy.ac.nup.lms.usecase.access.UserExtractor;
 import cy.ac.nup.lms.usecase.access.UserPersister;
+import cy.ac.nup.lms.usecase.scenario.AddStudentToCourseUseCase;
 import cy.ac.nup.lms.usecase.scenario.GetCourseUseCase;
 import cy.ac.nup.lms.usecase.scenario.GetDayScheduleUseCase;
 import cy.ac.nup.lms.usecase.scenario.GetUserInfoUseCase;
@@ -87,5 +89,13 @@ public class UseCaseConfiguration {
             UserExtractor userExtractor,
             UserPersister userPersister) {
         return new RemoveStudentFromCourseUseCase(courseExtractor, userExtractor, userPersister);
+    }
+
+    @Bean
+    public AddStudentToCourse addStudentToCourse(
+            UserExtractor userExtractor,
+            CourseExtractor courseExtractor,
+            UserPersister userPersister) {
+        return new AddStudentToCourseUseCase(userExtractor, courseExtractor, userPersister);
     }
 }
