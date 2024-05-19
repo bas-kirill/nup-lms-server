@@ -25,11 +25,11 @@ public class CourseStudentsEndpoint {
         return userExtractor.findAll().stream()
                 .filter(user -> user.courses().stream().anyMatch(course -> course.code().equals(code)))
                 .filter(user -> user.authority().equals("ROLE_STUDENT"))
-                .map(user -> new CourseStudentsModel(user.fullName()))
+                .map(user -> new CourseStudentsModel(user.fullName(), user.username().value))
                 .collect(Collectors.toSet());
     }
 
-    record CourseStudentsModel(String fullName) {
+    record CourseStudentsModel(String fullName, String login) {
 
     }
 }
