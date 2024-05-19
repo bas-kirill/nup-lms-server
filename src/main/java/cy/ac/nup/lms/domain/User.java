@@ -1,14 +1,51 @@
 package cy.ac.nup.lms.domain;
 
+import cy.ac.nup.lms.common.AggregateRoot;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
-import java.util.Set;
+import java.util.Map;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-public record User(Username username, String password, String authority, String fullName, Set<Course> courses)
-        implements UserDetails {
+@SuppressWarnings("java:S2055")
+public class User extends AggregateRoot<Username> implements UserDetails {
+
+    public final Username username;
+    public final String password;
+    public final String authority;
+    public final String fullName;
+    private final Map<CourseCode, Course> courses;
+
+    private User(Username username, String password, String authority, String fullName) {
+        super(username);
+        this.username = username;
+        this.password = password;
+        this.authority = authority;
+        this.fullName = fullName;
+        this.courses = new HashMap<>();
+    }
+
+    public static User create(Username username, String password, String authority, String fullName) {
+        return new User(username, password, authority, fullName);
+    }
+
+    public Map<CourseCode, Course> courses() {
+        return new HashMap<>(courses);
+    }
+
+    public void addCourse(Course course) {
+        courses.put(course.code, course);
+    }
+
+    public void addCourses(Collection<Course> courses) {
+        courses.forEach(this::addCourse);
+    }
+
+    public void removeCourse(Course course) {
+        courses.remove(course.code);
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

@@ -22,7 +22,7 @@ public class ActiveUsersEndpoint {
         return sessionRegistry.getAllPrincipals().stream()
                 .filter(u -> !sessionRegistry.getAllSessions(u, false).isEmpty())
                 .map(User.class::cast)
-                .map(user -> new UserModel(user.fullName(), user.username().value))
+                .map(user -> new UserModel(user.fullName, user.username.value))
                 .toList();
     }
 

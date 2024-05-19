@@ -21,7 +21,7 @@ public class CourseDetailsEndpoint {
     public Object getCourseDetails(@PathVariable String code) {
         CourseCode courseCode = CourseCode.from(code);
         return getCourse.execute(courseCode)
-                .fold(error -> error.message, course -> new CourseModel(course.code().value, course.name()));
+                .fold(error -> error.message, course -> new CourseModel(course.code.value, course.name));
     }
 
     record CourseModel(String courseCode, String name) {

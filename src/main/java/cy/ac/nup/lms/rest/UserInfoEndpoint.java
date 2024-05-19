@@ -30,10 +30,10 @@ public class UserInfoEndpoint {
 
         static UserInfoModel from(User user) {
             return new UserInfoModel(
-                    user.fullName(),
-                    user.authority(),
-                    user.username().value,
-                    user.courses().stream().map(course -> new CourseModel(course.code().value, course.name()))
+                    user.fullName,
+                    user.authority,
+                    user.username.value,
+                    user.courses().values().stream().map(course -> new CourseModel(course.code.value, course.name))
                             .toList());
         }
 
