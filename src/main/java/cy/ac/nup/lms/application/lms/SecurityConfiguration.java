@@ -55,8 +55,6 @@ public class SecurityConfiguration {
 
         http = http.authorizeHttpRequests(request ->
                 request.requestMatchers(new AntPathRequestMatcher("/api/auth/**")).permitAll()
-                        .requestMatchers(new AntPathRequestMatcher("/api/admin/**")).hasRole("ADMIN")
-                        .requestMatchers(new AntPathRequestMatcher("/api/user/**")).hasRole("STUDENT")
                         .anyRequest().authenticated());
 
         http.addFilterBefore(

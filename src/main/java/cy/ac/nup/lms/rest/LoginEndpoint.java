@@ -3,7 +3,6 @@ package cy.ac.nup.lms.rest;
 import cy.ac.nup.lms.domain.Password;
 import cy.ac.nup.lms.domain.Username;
 import cy.ac.nup.lms.usecase.Login;
-import cy.ac.nup.lms.usecase.scenario.LoginUseCase;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

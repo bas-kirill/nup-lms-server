@@ -1,6 +1,7 @@
 package cy.ac.nup.lms.application.lms;
 
 import cy.ac.nup.lms.usecase.GetDaySchedule;
+import cy.ac.nup.lms.usecase.GetUserInfo;
 import cy.ac.nup.lms.usecase.JwtGenerator;
 import cy.ac.nup.lms.usecase.JwtUsernameExtractor;
 import cy.ac.nup.lms.usecase.JwtValidator;
@@ -9,6 +10,7 @@ import cy.ac.nup.lms.usecase.MeExtractor;
 import cy.ac.nup.lms.usecase.ShowProfile;
 import cy.ac.nup.lms.usecase.access.UserExtractor;
 import cy.ac.nup.lms.usecase.scenario.GetDayScheduleUseCase;
+import cy.ac.nup.lms.usecase.scenario.GetUserInfoUseCase;
 import cy.ac.nup.lms.usecase.scenario.JwtGeneratorUseCase;
 import cy.ac.nup.lms.usecase.scenario.JwtUsernameExtractorUseCase;
 import cy.ac.nup.lms.usecase.scenario.JwtValidatorUseCase;
@@ -61,5 +63,10 @@ public class UseCaseConfiguration {
     @Bean
     public ShowProfile showProfile(UserExtractor userExtractor) {
         return new ShowProfileUseCase(userExtractor);
+    }
+
+    @Bean
+    public GetUserInfo getUserInfo(UserExtractor userExtractor) {
+        return new GetUserInfoUseCase(userExtractor);
     }
 }

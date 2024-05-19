@@ -10,7 +10,9 @@ import cy.ac.nup.lms.rest.LoginEndpoint;
 import cy.ac.nup.lms.rest.MeEndpoint;
 import cy.ac.nup.lms.rest.ProfileEndpoint;
 import cy.ac.nup.lms.rest.StudentEndpoint;
+import cy.ac.nup.lms.rest.UserInfoEndpoint;
 import cy.ac.nup.lms.usecase.GetDaySchedule;
+import cy.ac.nup.lms.usecase.GetUserInfo;
 import cy.ac.nup.lms.usecase.Login;
 import cy.ac.nup.lms.usecase.MeExtractor;
 import cy.ac.nup.lms.usecase.ShowProfile;
@@ -72,5 +74,10 @@ public class RestConfiguration {
     @Bean
     public CourseStudentsEndpoint courseStudentsEndpoint(UserExtractor userExtractor) {
         return new CourseStudentsEndpoint(userExtractor);
+    }
+
+    @Bean
+    public UserInfoEndpoint userInfoEndpoint(GetUserInfo getUserInfo) {
+        return new UserInfoEndpoint(getUserInfo);
     }
 }
