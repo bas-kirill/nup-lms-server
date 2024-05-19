@@ -7,5 +7,5 @@ COPY ./tools/docker/wait-for-it.sh wait-for-it.sh
 COPY ./tools/docker/docker-entrypoint.sh docker-entrypoint.sh
 COPY ./build/libs/*.jar app.jar
 
-ENTRYPOINT [ "./docker-entrypoint.sh" ]
+# use with postgres: ENTRYPOINT [ "./docker-entrypoint.sh" ]
 CMD ["java", "-jar", "./app.jar"]

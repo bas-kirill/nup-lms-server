@@ -11,7 +11,7 @@ if [ -z "$1" ]
     imageTag=latest
 fi
 
-imageFullName=nup/lms-backend:$imageTag
+imageFullName=nup-lms-backend:$imageTag
 
 echo [LMS STARTING] building "$imageFullName"...
 
