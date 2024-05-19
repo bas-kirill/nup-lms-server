@@ -14,7 +14,7 @@ public class CoursesEndpoint {
 
     private final CourseExtractor courseExtractor;
 
-    @RolesAllowed("ADMIN")
+    @RolesAllowed({"ADMIN", "FACULTY"})
     @RequestMapping("/courses")
     public List<CourseModel> getCourses() {
         return courseExtractor.findAll().stream()

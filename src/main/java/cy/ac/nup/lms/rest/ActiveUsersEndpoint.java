@@ -16,7 +16,7 @@ public class ActiveUsersEndpoint {
 
     private final SessionRegistry sessionRegistry;
 
-    @RolesAllowed("ADMIN")
+    @RolesAllowed({"ADMIN", "FACULTY"})
     @GetMapping("/users/active")
     public List<UserModel> findActiveUsers() {
         return sessionRegistry.getAllPrincipals().stream()

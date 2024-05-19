@@ -18,12 +18,13 @@ public class CourseStudentsEndpoint {
 
     private final UserExtractor userExtractor;
 
-    @RolesAllowed("ADMIN")
+    @RolesAllowed({"ADMIN", "FACULTY"})
     @GetMapping("/course/{courseCode}/students")
     public Set<CourseStudentsModel> getCourseStudents(@PathVariable String courseCode) {
         CourseCode code = CourseCode.from(courseCode);
         return userExtractor.findAll().stream()
                 .filter(user -> user.courses().stream().anyMatch(course -> course.code().equals(code)))
+                .filter(user -> user.authority().equals("ROLE_STUDENT"))
                 .map(user -> new CourseStudentsModel(user.fullName()))
                 .collect(Collectors.toSet());
     }
